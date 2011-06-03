@@ -1,0 +1,134 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mail;
+using System.Web.Mvc;
+using VentanaTuristica.Model;
+using VentanaTuristica.Repositorios;
+
+namespace VentanaTuristica.Controllers
+{
+    [HandleError] 
+    public class EmpresaController : Controller
+    {
+        //
+        // GET: /Empresa/
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Index(string empresa)
+        {
+            IRepositorio<Empresa> myRepoEmpresa = new EmpresaRepositorio();
+            IList<Empresa> listaEmpresa = myRepoEmpresa.GetAll();
+            IList<Empresa> empresasBuscadas = new List<Empresa>();
+            if (empresa != null)
+            {
+                foreach (var empresa1 in listaEmpresa)
+                {
+                    if (empresa1.Nombre == empresa)
+                    {
+                        empresasBuscadas.Add(empresa1);
+                    }
+                }
+                return View(empresasBuscadas);
+            }
+            return View(listaEmpresa);
+        }
+
+        //
+        // GET: /Empresa/Details/5
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        //
+        // GET: /Empresa/Create
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Create()
+        {
+           return View();
+        } 
+
+        //
+        // POST: /Empresa/Create
+
+        [HttpPost]
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Create(Empresa E)
+        {
+            if (ModelState.IsValid)
+            {
+                IRepositorio<Empresa> repo = new EmpresaRepositorio();
+                repo.Save(E);
+                return RedirectToAction("Index");
+            }
+
+            // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
+            return View(E);
+        }
+        
+        //
+        // GET: /Empresa/Edit/5
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        //
+        // POST: /Empresa/Edit/5
+
+        [HttpPost]
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+ 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //
+        // GET: /Empresa/Delete/5
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Delete(int id)
+        {
+            IRepositorio<Empresa> repo = new EmpresaRepositorio();
+            Empresa E = repo.GetById(id);
+            repo.Delete(E);
+            return RedirectToAction("Index");
+        }
+
+       
+        public ActionResult Find(string q)
+        {
+            IRepositorio<Empresa> repoP = new EmpresaRepositorio();
+            IList<Empresa> empresas = repoP.GetAll();
+            IList<Empresa> posiblesEmpresas = new List<Empresa>();
+
+            foreach (var item in empresas)
+            {
+                if (item.Nombre.Contains(q.ToUpper()) || item.Nombre.Contains(q.ToLower()))
+                {
+                    posiblesEmpresas.Add(item);
+                }
+            }
+            string[] emp = new string[posiblesEmpresas.Count];
+            int i = 0;
+            foreach (var empresa in posiblesEmpresas)
+            {
+                emp[i] = empresa.Nombre;
+                i++;
+            }
+
+            return Content(string.Join("\n", emp)); ;
+        }
+    }
+}

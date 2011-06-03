@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="VentanaTuristica.Model" assembly="VentanaTuristica" xmlns="urn:nhibernate-mapping-2.2">
+	<class name="PublicacionServicio" lazy="true" table="`PublicacionServicio`" schema="`dbo`">
+		<composite-id>
+			<key-property name="IdServicio" column="`IdServicio`" />
+			<key-property name="IdPublicacion" column="`IdPublicacion`" />
+		</composite-id>
+	</class>
+</hibernate-mapping>

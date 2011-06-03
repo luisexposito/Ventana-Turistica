@@ -1,0 +1,188 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using VentanaTuristica.Model;
+using VentanaTuristica.Repositorios;
+
+namespace VentanaTuristica.Controllers
+{
+    public class SubCategoriumController : Controller
+    {
+        //
+        // GET: /SubCategorium/
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Index(string subcategoria)
+        {
+            IRepositorio<SubCategorium> myRepoSubCategorium = new SubCategoriumRepositorio();
+            IList<SubCategorium> listaSubCategoriums = myRepoSubCategorium.GetAll();
+            IRepositorio<Categorium> myRepoCategorium = new CategoriumRepositorio();
+            Categorium listaCategoriums;
+            foreach (var SubCategoriumDelist in listaSubCategoriums)
+            {
+                SubCategoriumDelist.Categorium = myRepoCategorium.GetById(SubCategoriumDelist.IdCategoria);
+            }
+            IList<SubCategorium> subCategoriumsBuscadas = new List<SubCategorium>();
+            if (subcategoria != null)
+            {
+                foreach (var subCategorium in listaSubCategoriums)
+                {
+                    if (subCategorium.Nombre == subcategoria)
+                    {
+                        subCategoriumsBuscadas.Add(subCategorium);
+                    }
+                }
+                return View(subCategoriumsBuscadas);
+            }
+            return View(listaSubCategoriums);
+        }
+
+        //
+        // GET: /SubCategorium/Details/5
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        //
+        // GET: /SubCategorium/Create
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Create()
+        {
+            IRepositorio<Categorium> myRepoCategorium = new CategoriumRepositorio();
+            IList<Categorium> listaCategoriums = myRepoCategorium.GetAll();
+            IList<String> nombresCat = listaCategoriums.Select(listaCategorium => listaCategorium.Nombre).ToList();
+            ViewData["SubCategorium.Categorium.Nombre"] = new SelectList(nombresCat);
+            IEnumerable<string> items = new string[] { "en-US", "es-MX" };
+            ViewData["SubCategorium.Idioma"] = new SelectList(items);
+            return View();
+        }
+
+        //
+        // POST: /SubCategorium/Create
+
+        [HttpPost]
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Create(SubCategorium subCategorium)
+        {IRepositorio<Categorium> myRepoCategorium = new CategoriumRepositorio();
+            
+            try
+            {
+                
+                IList<Categorium> listaCategoriums = myRepoCategorium.GetAll();
+                foreach (var listaCategorium in listaCategoriums)
+                {
+                    if (listaCategorium.Nombre == subCategorium.Categorium.Nombre)
+                    {
+                        subCategorium.IdCategoria = listaCategorium.IdCategoria;
+                    }
+
+                }
+                IRepositorio<SubCategorium> myRepoSubCategorium = new SubCategoriumRepositorio();
+                myRepoSubCategorium.Save(subCategorium);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                IList<Categorium> listaCategoriums = myRepoCategorium.GetAll();
+            IList<String> nombresCat = listaCategoriums.Select(listaCategorium => listaCategorium.Nombre).ToList();
+            ViewData["SubCategorium.Categorium.Nombre"] = new SelectList(nombresCat);
+            IEnumerable<string> items = new string[] { "en-US", "es-MX" };
+            ViewData["SubCategorium.Idioma"] = new SelectList(items);
+                return View(subCategorium);
+            }
+        }
+        
+        //
+        // GET: /SubCategorium/Edit/5
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Edit(int id)
+        {
+            IRepositorio<SubCategorium> myRepoSubCategorium = new SubCategoriumRepositorio();
+            return View(myRepoSubCategorium.GetById(id));
+        }
+
+        //
+        // POST: /SubCategorium/Edit/5
+
+        [HttpPost]
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Edit(int id,int idCat, SubCategorium subCategorium)
+        {
+            try
+            {
+                IRepositorio<SubCategorium> myRepoSubCategorium = new SubCategoriumRepositorio();
+                subCategorium.IdSubCategoria = id;
+                subCategorium.IdCategoria = idCat;
+                myRepoSubCategorium.Update(subCategorium);
+                return RedirectToAction("Index");
+            }
+            catch (Exception O)
+            {
+                return View();
+            }
+        }
+
+        //
+        // GET: /SubCategorium/Delete/5
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                IRepositorio<SubCategorium> myRepoSubCategorium = new SubCategoriumRepositorio();
+                myRepoSubCategorium.Delete(myRepoSubCategorium.GetById(id));
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        //
+        // POST: /SubCategorium/Delete/5
+
+        [HttpPost]
+        [Authorize(Users = "admin,j2lteam")]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+ 
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Find(string q)
+        {
+            IRepositorio<SubCategorium> repoS = new SubCategoriumRepositorio();
+            IList<SubCategorium> subCategoriums = repoS.GetAll();
+            IList<SubCategorium> posiblesCategorias = new List<SubCategorium>();
+
+            foreach (var item in subCategoriums)
+            {
+                if (item.Nombre.Contains(q.ToUpper()) || item.Nombre.Contains(q.ToLower()))
+                {
+                    posiblesCategorias.Add(item);
+                }
+            }
+            string[] emp = new string[posiblesCategorias.Count];
+            int i = 0;
+            foreach (var categoria in posiblesCategorias)
+            {
+                emp[i] = categoria.Nombre;
+                i++;
+            }
+
+            return Content(string.Join("\n", emp)); ;
+        }
+    }
+}

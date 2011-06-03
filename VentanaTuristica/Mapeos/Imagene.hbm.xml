@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping namespace="VentanaTuristica.Model" assembly="VentanaTuristica" xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Imagene" lazy="true" table="`Imagenes`" schema="`dbo`">
+		<id name="IdImagen" access="property" column="`IdImagen`">
+			<generator class="native" />
+		</id>
+		<property name="DatosOriginal" column="`DatosOriginal`" />
+		<property name="DatosTrans" column="`DatosTrans`" />
+		<property name="Descripcion" column="`Descripcion`" />
+		<property name="IdPatrocinante" column="`IdPatrocinante`" />
+		<property name="IdPublicacion" column="`IdPublicacion`" />
+		<property name="Tipo" column="`Tipo`" length="1" />
+    <property name="Link" column="`Link`" />
+	</class>
+</hibernate-mapping>
