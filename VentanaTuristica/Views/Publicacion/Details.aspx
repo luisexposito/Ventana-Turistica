@@ -131,7 +131,18 @@
 
 </td></tr></table>
 
-
+ <!-- AddThis Button BEGIN -->
+      <h1 class="addthis_toolbox addthis_default_style ">
+         <a class="addthis_button_preferred_1"></a>
+         <a class="addthis_button_preferred_2"></a>
+         <a class="addthis_button_preferred_3"></a>
+         <a class="addthis_button_preferred_4"></a>
+         <a class="addthis_button_compact"></a>
+         <a class="addthis_counter addthis_bubble_style"></a>
+       </h1>
+       <script type="text/javascript">           var addthis_config = { "data_track_clickback": true };</script>
+       <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4dc0a19b40eda3d6"></script>
+    <!-- AddThis Button END -->   
 <table style="border: 2px none #C0C0C0;width:770px">
 <tr>
 <td class="tituloTabla2"><%=ResourceEmpresa.Services%></td>

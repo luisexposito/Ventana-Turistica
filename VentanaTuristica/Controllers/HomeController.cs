@@ -17,6 +17,10 @@ namespace VentanaTuristica.Controllers
         {
             return View();
         }
+        public ActionResult Contact()
+        {
+            return View();
+        }
         public ActionResult Busqueda()
         {
             return View();
