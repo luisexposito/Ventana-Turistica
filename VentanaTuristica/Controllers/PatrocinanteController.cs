@@ -29,7 +29,7 @@ namespace VentanaTuristica.Controllers
         //
         // GET: /Empresa/
         [Authorize(Users = "admin,j2lteam")]
-        public ActionResult Index(String tipo)
+        public ActionResult Index(String tipo, string patrocinante)
         {
             IRepositorio<Patrocinante> repoPatrocinante = new PatrocinanteRepositorio();
             IList<Patrocinante> patrocinantesAux = new List<Patrocinante>();
@@ -46,11 +46,11 @@ namespace VentanaTuristica.Controllers
             IRepositorio<Imagene> repoImagen = new ImageneRepositorio();
             IList<Imagene> imagenes = repoImagen.GetAll();
 
-            foreach (var patrocinante in patrocinantes)
+            foreach (var patrocinante1 in patrocinantes)
             {
                 foreach (var contacto in TodosContactos)
                 {
-                    if (contacto.IdPatrocinante == patrocinante.IdPatrocinante)
+                    if (contacto.IdPatrocinante == patrocinante1.IdPatrocinante)
                     {
                         foreach (var telefono in TodosTelefonos)
                         {
@@ -64,34 +64,60 @@ namespace VentanaTuristica.Controllers
                         contactos.Add(contacto);
                     }
                 }
-                patrocinante.Contacto = contactos;
+                patrocinante1.Contacto = contactos;
                 contactos = new List<Contacto>();
 
                 foreach (var imagene in imagenes)
                 {
                     if (imagene.IdPatrocinante != null)
-                        if (imagene.IdPatrocinante == patrocinante.IdPatrocinante)
+                        if (imagene.IdPatrocinante == patrocinante1.IdPatrocinante)
                         {
-                            patrocinante.Imagene = imagene;
+                            patrocinante1.Imagene = imagene;
                             if (tipo != null)
                             {
                                 if (tipo == "S")
                                 {
                                     if (imagene.Tipo == "S")
-                                        patrocinantesAux.Add(patrocinante);
+                                        patrocinantesAux.Add(patrocinante1);
                                 }
                                 else
                                 {
                                     if (imagene.Tipo == "L")
-                                        patrocinantesAux.Add(patrocinante);
+                                        patrocinantesAux.Add(patrocinante1);
                                 }
                             }
                         }
                 }
             }
             if (tipo != null)
+            {
+                if (patrocinante != null)
+                {
+                    IList<Patrocinante> patrocinantesBuscados = new List<Patrocinante>();
+                    foreach (var patrocinante1 in patrocinantesAux)
+                    {
+                        if (patrocinante1.Nombre == patrocinante)
+                        {
+                            patrocinantesBuscados.Add(patrocinante1);
+                        }
+                    }
+                    return View(patrocinantesBuscados);
+                }
                 return View(patrocinantesAux);
-            
+            }
+
+            if (patrocinante != null)
+            {
+                IList<Patrocinante> patrocinantesBuscados = new List<Patrocinante>();
+                foreach (var patrocinante1 in patrocinantes)
+                {
+                    if (patrocinante1.Nombre == patrocinante)
+                    {
+                        patrocinantesBuscados.Add(patrocinante1);
+                    }
+                }
+                return View(patrocinantesBuscados);
+            }
             return View(patrocinantes);
         }
 
@@ -272,7 +298,8 @@ namespace VentanaTuristica.Controllers
                 }
             }
 
-            if (ModelState.IsValid)
+            if (patrocinante.Nombre != null && patrocinante.Contacto[0].Nombre != null && patrocinante.Contacto[0].ListaTelefonos[0].CodigoInt != 0 &&
+                patrocinante.Contacto[0].ListaTelefonos[0].CodigoLoc != 0 && patrocinante.Contacto[0].ListaTelefonos[0].Numero != 0)
             {
                 IRepositorio<Patrocinante> repoPatrocinante = new PatrocinanteRepositorio();
                 repoPatrocinante.Update(patrocinante);
@@ -285,11 +312,17 @@ namespace VentanaTuristica.Controllers
                 foreach (var telefono in patrocinante.Contacto[0].ListaTelefonos)
                 {
                     telefono.IdContacto = patrocinante.Contacto[0].IdContacto;
-                    repoTelefono.Save(telefono);
+                    if (telefono.CodigoInt != 0 && telefono.CodigoLoc != 0 && telefono.Numero != 0)
+                        if (telefono.IdTelefono != 0)
+                            repoTelefono.Update(telefono);
+                        else
+                            repoTelefono.Save(telefono);
                 }
-
-                myImagene.IdPatrocinante = patrocinante.IdPatrocinante;
-                repoImagen.Update(myImagene);
+                if (patrocinante.File != null)
+                {
+                    myImagene.IdPatrocinante = patrocinante.IdPatrocinante;
+                    repoImagen.Update(myImagene);
+                }
 
                 return RedirectToAction("Index");
             }
