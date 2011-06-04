@@ -4,8 +4,8 @@
     <ul id="nav">         
         <li><%: Html.ActionLink("Bio", "Index", "Home")%>
         <ul>
-        <li><%: Html.ActionLink(ResourceEmpresa.BioUs, "Index", "Home")%></li>
-        <li><%: Html.ActionLink(ResourceEmpresa.BioContac, "Index", "Home")%></li>
+        <li><%: Html.ActionLink(ResourceEmpresa.BioUs, "About", "Home")%></li>
+        <li><%: Html.ActionLink(ResourceEmpresa.BioContac, "Contact", "Home")%></li>
         </ul>
         </li>     
         <% 

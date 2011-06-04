@@ -82,7 +82,7 @@
 
 </style>
 <script src="http://www.microcosmotalk.com/tech/scripts/library/country.js"></script> 
-
+<div style=" height:10px"></div>
 <div style=" text-align:center; margin-left:auto; margin-right:auto;">
 
     <%=Html.ActionLink(ResourceEmpresa.LowPrice, "Lista", new { pagActual = Convert.ToInt32(ViewData["pagActual"]), orden = 0, lug = Request["lug"], cat = Request["cat"], sub = Request["sub"] })%>

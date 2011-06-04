@@ -140,7 +140,30 @@ namespace VentanaTuristica.Controllers
    
         public ActionResult Ofertas()
         {
-            return View();
+            IRepositorio<Imagene> repoImagen = new ImageneRepositorio();
+            IList<Imagene> myImagene = repoImagen.GetAll();
+            IList<Imagene> sponsorImage = new List<Imagene>();
+            IList<Imagene> sponsorImageCopy = new List<Imagene>();
+
+            foreach (var imagene in myImagene)
+            {
+                if (imagene.Tipo == "S")
+                {
+                    sponsorImageCopy.Add(imagene);
+                    sponsorImage.Add(imagene);
+                }
+            }
+
+            IList<Imagene> sponsorImageDesordenada = new List<Imagene>();
+
+            Random randNum = new Random();
+            while (sponsorImage.Count > 0)
+            {
+                int val = randNum.Next(0, sponsorImage.Count - 1);
+                sponsorImageDesordenada.Add(sponsorImage[val]);
+                sponsorImage.RemoveAt(val);
+            }
+            return View(sponsorImageDesordenada);
         } 
 
         //

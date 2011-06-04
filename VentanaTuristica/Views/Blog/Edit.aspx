@@ -6,13 +6,16 @@
 
 <asp:Content ID="Content2" ValidateRequest="false" ContentPlaceHolderID="MainContent" runat="server">
  <link rel="stylesheet" type="text/css" href="../../Content/jHtmlArea.css"/>
-<script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery-1.3.2.min.js") %>" ></script>
 <script type="text/javascript" src="<%:Url.Content("~/Scripts/jHtmlArea-0.7.0.min.js") %>" ></script>
 <script type="text/javascript" src="<%:Url.Content("~/Scripts/jHtmlArea.ColorPickerMenu-0.7.0.min.js") %>"></script>
    
    <script type="text/javascript">
-       $(document).ready(function () {
-           $("textarea").htmlarea();
+       jQuery.noConflict();
+       jQuery(document).ready(function () {
+           jQuery("textarea").htmlarea();
+       });
+       jQuery(function () {
+           jQuery("#Fecha").datepicker();
        });
  </script>
 
