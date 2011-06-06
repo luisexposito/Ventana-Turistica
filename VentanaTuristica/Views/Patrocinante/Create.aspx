@@ -131,6 +131,14 @@
                     <%: Html.ValidationMessageFor(model => model.Contacto[0].Mail)%>
                 </div>
 
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Contacto[0].Mail2) %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.TextBoxFor(model => model.Contacto[0].Mail2)%>
+                    <%: Html.ValidationMessageFor(model => model.Contacto[0].Mail2)%>
+                </div>
+
             </fieldset>
 
             <fieldset>
@@ -228,6 +236,7 @@
         jQuery.noConflict();
         jQuery(document).ready(function () {
 
+            var checkbox1 = document.getElementById("telefono1");
             var codI1 = document.getElementById("Contacto_0__ListaTelefonos_1__CodigoInt");
             var codL1 = document.getElementById("Contacto_0__ListaTelefonos_1__CodigoLoc");
             var num1 = document.getElementById("Contacto_0__ListaTelefonos_1__Numero");
@@ -236,13 +245,16 @@
                 codL1.value = "";
                 codI1.value = "";
                 num1.value = "";
+                checkbox1.checked = false;
             }
             else {
                 codL1.disabled = false;
                 codI1.disabled = false;
                 num1.disabled = false;
+                checkbox1.checked = true;
             }
 
+            var checkbox2 = document.getElementById("telefono2");
             var codI2 = document.getElementById("Contacto_0__ListaTelefonos_2__CodigoInt");
             var codL2 = document.getElementById("Contacto_0__ListaTelefonos_2__CodigoLoc");
             var num2 = document.getElementById("Contacto_0__ListaTelefonos_2__Numero");
@@ -251,13 +263,16 @@
                 codL2.value = "";
                 codI2.value = "";
                 num2.value = "";
+                checkbox2.checked = false;
             }
             else {
                 codL2.disabled = false;
                 codI2.disabled = false;
                 num2.disabled = false;
+                checkbox2.checked = true;
             }
 
+            var checkbox3 = document.getElementById("telefono3");
             var codI3 = document.getElementById("Contacto_0__ListaTelefonos_3__CodigoInt");
             var codL3 = document.getElementById("Contacto_0__ListaTelefonos_3__CodigoLoc");
             var num3 = document.getElementById("Contacto_0__ListaTelefonos_3__Numero");
@@ -266,11 +281,13 @@
                 codL3.value = "";
                 codI3.value = "";
                 num3.value = "";
+                checkbox3.checked = false;
             }
             else {
                 codL3.disabled = false;
                 codI3.disabled = false;
                 num3.disabled = false;
+                checkbox3.checked = true;
             }
 
         });

@@ -81,7 +81,16 @@
                     <%:item.Localidad%>
                 </td>
                 <td>
-                    <%:item.Website%>
+                     <% if (item.Website != null)
+                        {%>
+                       <a href="<%:item.Website%>" target="_blank">Ir al Sitio...</a>
+                       <%
+                         }
+                        else
+                        {%>
+                        -
+                        <%
+                        }%>
                 </td>
                 <td>
                     <%:item.Mail%>

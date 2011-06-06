@@ -135,8 +135,14 @@
   <data name="Category" xml:space="preserve">
     <value>Categoria</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comentarios</value>
+  </data>
   <data name="Companies" xml:space="preserve">
     <value>Empresas</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contacto</value>
   </data>
   <data name="Coordenates" xml:space="preserve">
     <value>Coordenadas</value>
@@ -200,6 +206,9 @@
   </data>
   <data name="Services" xml:space="preserve">
     <value>Servicios y Actividades</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Ir al Sitio...</value>
   </data>
   <data name="Spanish" xml:space="preserve">
     <value>Español</value>
