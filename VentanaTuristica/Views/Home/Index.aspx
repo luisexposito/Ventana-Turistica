@@ -30,4 +30,5 @@
 <div align="center">
 <% Html.RenderAction("Imagenes","Imagene");%>
 </div>
+<br class="c"/>
 </asp:Content>

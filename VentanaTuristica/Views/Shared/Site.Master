@@ -17,6 +17,10 @@
     <script type="text/javascript" src="<%:Url.Content("~/Content/floatbox/floatbox.js") %>"></script>
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.ui.datepicker-es.js") %>"></script>
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.ui.datepicker.js") %>"></script>
+    <link href="../../Content/sample.css?t=1" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/captify.tiny.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/captify.js") %>"></script>
     <script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
     <style>
     .bl3 {background-color: #cdc9c9; width:910px; margin-left:auto; margin-right:auto;}
@@ -41,7 +45,7 @@
 	</style>
 
      <script type="text/javascript">
-
+        
 
          function fillWindow2() {
 
@@ -180,10 +184,6 @@
     <!-- javascript coding -->
     <script type="text/javascript">
         jQuery.noConflict();
-        jQuery(document).ready(function () {
-            var root = jQuery("#scroller").scrollable({ circular: true }).autoscroll({ autoplay: true });
-            window.api = root.data("scrollable");
-        });
 
 
         window.onresize = fillWindow;
@@ -326,6 +326,7 @@
             jQuery('#loading-image').hide();
             jQuery('#all').fadeIn(2000);
             fillWindow();
+            
         });
        
     </script>
