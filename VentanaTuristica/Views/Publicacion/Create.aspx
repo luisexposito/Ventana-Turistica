@@ -64,9 +64,7 @@
             <%= Html.TextAreaFor(model => model.Idioma[0].Descripcion)%>
         </div>
 
-        <div class="editor-label">
-        <label for="Direccion"> Direccion:</label>
-        </div>
+       
            <div class="editor-field">
                  <label> Pais:</label>    
                 <%= Html.DropDownList("Pais")%>
@@ -82,7 +80,11 @@
                 <label> Localidad:</label>
                  <%= Html.DropDownList("Ciudad")%>    
             </div>
+            <div class="editor-label">
+             <label> Direccion:</label>
+             </div>
         <div class="editor-field">
+       
         <%= Html.TextAreaFor(model => model.Direccion)%>
         </div>
          </fieldset>
@@ -206,9 +208,9 @@
     <% } %>
 
      <script type="text/javascript">
-
-         $(document).ready(function () {
-             $("input#Empresa").autocomplete('<%= Url.Action("Find", "Empresa") %>');
+         jQuery.noConflict();
+         jQuery(document).ready(function () {
+             jQuery("#Empresa").autocomplete('<%= Url.Action("Find", "Empresa") %>');
          }); 
 
 </script>

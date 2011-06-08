@@ -221,9 +221,9 @@
                     div4.style.width = ancho + 'px';
                     div5.style.width = ancho + 'px';
                     div6.style.width = ancho + 'px';
-                    div8.style.height = eval(div7.offsetHeight + 4) + 'px';
-                    div9.style.height = eval(div7.offsetHeight + 4) + 'px';
-                    div10.style.height = eval(div7.offsetHeight + 4) + 'px';
+                    div8.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div9.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div10.style.height = eval(div7.offsetHeight + 25) + 'px';
                     div11.style.width = div12.offsetWidth + 'px';
 
                     var suma = eval(div7.offsetWidth) + eval(div8.offsetWidth) + eval(div9.offsetWidth);
@@ -274,9 +274,9 @@
                     div4.style.width = (ancho + 9) + 'px';
                     div5.style.width = ancho + 'px';
                     div6.style.width = ancho + 'px';
-                    div8.style.height = eval(div7.offsetHeight + 4) + 'px';
-                    div9.style.height = eval(div7.offsetHeight + 4) + 'px';
-                    div10.style.height = eval(div7.offsetHeight + 4) + 'px';
+                    div8.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div9.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div10.style.height = eval(div7.offsetHeight + 25) + 'px';
                     div11.style.width = div12.offsetWidth + 'px';
 
                     var suma = eval(div7.offsetWidth) + eval(div8.offsetWidth) + eval(div9.offsetWidth);
@@ -325,8 +325,8 @@
             });
             jQuery('#loading-image').hide();
             jQuery('#all').fadeIn(2000);
-            fillWindow();
             
+            fillWindow();
         });
        
     </script>
