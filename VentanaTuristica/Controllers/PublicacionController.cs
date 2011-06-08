@@ -274,24 +274,40 @@ namespace VentanaTuristica.Controllers
         public ActionResult Create(Publicacion p,FormCollection collection)
         {
             //Empresa
-            var nombreEmpresa =collection[0];
+            var nombreEmpresa = collection[0];
             var repoEmp = new EmpresaRepositorio();
             var listaEmp = repoEmp.GetAll();
             foreach (var empresa in listaEmp.Where(empresa => empresa.Nombre == nombreEmpresa))
             {
                 p.IdEmpresa = empresa.IdEmpresa;
             }
-            if(String.IsNullOrEmpty(nombreEmpresa)|| p.IdEmpresa==0)
-            {   
-                ModelState.AddModelError("NombreE","Nombre Empresa es Necesario");
+            if (String.IsNullOrEmpty(nombreEmpresa) || p.IdEmpresa == 0)
+            {
+                ModelState.AddModelError("NombreE", "Nombre Empresa es Necesario");
                 return View(p);
             }
-           
+            if (String.IsNullOrEmpty(p.Pais) || p.Pais.CompareTo("--Seleccione--")==0)
+            {
+                ModelState.AddModelError("Pais", "Pais es Necesario");
+                return View(p);
+            }
+            if (String.IsNullOrEmpty(p.Estado) || p.Estado.CompareTo("--Seleccione--") == 0)
+            {
+                ModelState.AddModelError("Estado", "Estado es Necesario");
+                return View(p);
+            }
+            if (String.IsNullOrEmpty(p.Ciudad) || p.Ciudad.CompareTo("--Seleccione--") == 0)
+            {
+                ModelState.AddModelError("Ciudad", "Ciudad es Necesario");
+                return View(p);
+            }
+
+
             //fin Empresa
             //Sub Categoria
             var repoSub = new SubCategoriumRepositorio();
             var listaSub = repoSub.GetAll();
-            var subCategorias =p.SubCategorium.Nombre.Split('-');
+            var subCategorias = p.SubCategorium.Nombre.Split('-');
             var subCategoria = "";
             subCategoria = subCategorias[1].Substring(1);
             p.SubCategorium = new SubCategorium();
@@ -306,7 +322,7 @@ namespace VentanaTuristica.Controllers
             var repoLug = new LugarRepositorio();
             p.Ciudad = repoLug.GetById(Convert.ToInt32(p.Ciudad)).Nombre;
             p.Estado = repoLug.GetById(Convert.ToInt32(p.Estado)).Nombre;
-            var idPublicacion =repoPubli.Save(p);
+            var idPublicacion = repoPubli.Save(p);
 
             //Precios
             IList<Precio> listaPrecios = p.Precios;
@@ -319,20 +335,23 @@ namespace VentanaTuristica.Controllers
 
             //fin Precios
             p.Idioma = myIdiomas;
-            //Servicios 
-            var misServicios = new List<Servicio>(p.Servicios);
-            foreach (var misServicio in misServicios)
-            {
-                if (misServicio.IdServicio == 0) continue;
-                var pB = new PublicacionServicio
-                             {
-                                 IdPublicacion = idPublicacion,
-                                 IdServicio = misServicio.IdServicio
-                             };
-                var repoPubSer = new PublicacionServicioRepositorio();
-                repoPubSer.Save(pB);
+            //Servicios
+            if (p.Servicios != null){
+                var misServicios = new List<Servicio>(p.Servicios);
+                foreach (var misServicio in misServicios)
+                {
+                    if (misServicio.IdServicio == 0) continue;
+                    var pB = new PublicacionServicio
+                                 {
+                                     IdPublicacion = idPublicacion,
+                                     IdServicio = misServicio.IdServicio
+                                 };
+                    var repoPubSer = new PublicacionServicioRepositorio();
+                    repoPubSer.Save(pB);
+                }
             }
-            //fin Servicios
+
+        //fin Servicios
             //Idioma 
             var repoIdioma = new IdiomaRepositorio();
             var idioma = p.Idioma[0];
