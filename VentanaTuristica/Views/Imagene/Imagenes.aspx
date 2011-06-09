@@ -3,18 +3,24 @@
     <%  if (Model != null)
         { %>
         
-        <div class="fbCycler" style="width: 900px; height:450px">
-         <% foreach (var item in Model)
-            { %>
+            <div id="gallery">  
+         <%
 
-                <div id="contenido">
-                    <p class="floatbox" data-fb-options="modal:false disableScroll:true width:250 scrolling:no enableDragMove:false enableDragResize:false cornerRadius:4 padding:12 colorTheme:white cycleInterval:8">
-                        <img class="fbTooltip" src='<%=Url.Action("Show", "Imagene", new {id = item.IdImagen})%>' alt="<%: item.Descripcion %>" style="width:900px"/>
-                    </p>
+            int contador = 0;
+            foreach (var item in Model)
+            { 
+                if (contador == 0)
+                { %>
+                    <a style="opacity: 1; " class="show"><img class="captify" src='<%=Url.Action("Show", "Imagene", new {id = item.IdImagen})%>' alt="<%: item.Descripcion %>" width="900px" title="" rel=""/></a>
+                
+                <% } 
+                else
+                { %>
+                    <a style="opacity: 0; " class=""><img class="captify" src='<%=Url.Action("Show", "Imagene", new {id = item.IdImagen})%>' alt="<%: item.Descripcion %>" width="900px" title="" rel=""/></a>
+                <%}
+                contador++;
+            } %>
+                <div class="caption" style="width: 950px; opacity: 0; height: 100px; display: block; "><div class="content" style="opacity: 0; "></div></div>
                 </div>
-                    
-            <%} %>
+                <br class="c" />
         <%} %>
-
-        </div>
-        

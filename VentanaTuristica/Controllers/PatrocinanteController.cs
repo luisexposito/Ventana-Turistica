@@ -435,9 +435,10 @@ namespace VentanaTuristica.Controllers
             IList<Imagene> sponsorImageDesordenada = new List<Imagene>();
 
             Random randNum = new Random();
+            int val;
             while (sponsorImage.Count > 0)
             {
-                int val = randNum.Next(0, sponsorImage.Count - 1);
+                val = randNum.Next(sponsorImage.Count);
                 sponsorImageDesordenada.Add(sponsorImage[val]);
                 sponsorImage.RemoveAt(val);
             }
