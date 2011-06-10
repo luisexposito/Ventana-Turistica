@@ -27,7 +27,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div align="center">
+<div align="center" style=" padding-left:22px; padding-top:5px">
 <% Html.RenderAction("Imagenes","Imagene");%>
 </div>
 <br class="c"/>
