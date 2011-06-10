@@ -1,0 +1,371 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <meta name="description" content="Portal web creado para mostrarle al viajero selectas ofertas turísticas, actividades y demás servicios disponibles en el país." />
+    <meta name="keywords" content="ventana turistica turismo hospedajes viajes posadas actividades " />
+    <meta name="author" content="J2LTeam - j2lteam.ve@gmail.com" />
+    <link rel="SHORTCUT ICON" href="../../Content/logo.ico"/>
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery-ui.1.8.2.min.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery-getCSS.min.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.loadImages.1.0.1.min.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.autocomplete.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.tools.min.js") %>"></script>
+    <link href="../../Content/floatbox/floatbox.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<%:Url.Content("~/Content/floatbox/floatbox.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.ui.datepicker-es.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.ui.datepicker.js") %>"></script>
+    <link href="../../Content/sample.css?t=1" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/captify.tiny.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/captify.js") %>"></script>
+    <script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.latest.js"></script>
+   
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //Execute the slideShow
+            
+        });
+        function slideShow() {
+            //Set the opacity of all images to 0
+            jQuery('#gallery a').css({ opacity: 0.0 });
+            //Get the first image and display it (set it to full opacity)
+            jQuery('#gallery a:first').css({ opacity: 1.0 });
+            //Set the caption background to semi-transparent
+            jQuery('#gallery .caption').css({ opacity: 0 });
+            //Resize the width of the caption according to the image width
+            jQuery('#gallery .caption').css({ width: jQuery('#gallery a').find('img').css('width') });
+            //Get the caption of the first image from REL attribute and display it
+            jQuery('#gallery .content').html(jQuery('#gallery a:first').find('img').attr('rel'))
+	.animate({ opacity: 0 }, 400);
+            //Call the gallery function to run the slideshow, 6000 = change to next image after 6 seconds
+            setInterval('gallery()', 4000);
+        }
+        function gallery() {
+            //if no IMGs have the show class, grab the first image
+            var current = (jQuery('#gallery a.show') ? jQuery('#gallery a.show') : jQuery('#gallery a:first'));
+            //Get next image, if it reached the end of the slideshow, rotate it back to the first image
+            var next = ((current.next().length) ? ((current.next().hasClass('caption')) ? jQuery('#gallery a:first') : current.next()) : jQuery('#gallery a:first'));
+            //Get next image caption
+            var caption = next.find('img').attr('rel');
+            //Set the fade in effect for the next image, show class has higher z-index
+            next.css({ opacity: 0.0 })
+	.addClass('show')
+	.animate({ opacity: 1.0 }, 1000);
+            //Hide the current image
+            current.animate({ opacity: 0.0 }, 1000)
+	.removeClass('show');
+            //Set the opacity to 0 and height to 1px
+            jQuery('#gallery .caption').animate({ opacity: 0.0 }, { queue: false, duration: 50 }).animate({ height: '1px' }, { queue: true, duration: 300 });
+            //Animate the caption, opacity to 0.7 and heigth to 100px, a slide up effect
+            jQuery('#gallery .caption').animate({ opacity: 0.0 }, 100).animate({ height: '100px' }, 500);
+            //Display the content
+            jQuery('#gallery .content').html(caption);
+        }
+</script> 
+     <script type="text/javascript">
+        
+
+         function fillWindow2() {
+
+             var div = document.getElementById("compFooterIzq");
+             var div2 = document.getElementById("compFooterDer");
+             var div3 = document.getElementById("compHeaderIzq");
+             var div4 = document.getElementById("compHeaderDer");
+             var div11 = document.getElementById("Header");
+             var div12 = document.getElementById("Footer");
+             var ancho = 0;
+             try {
+                 if (window.innerHeight) { //if browser supports window.innerWidth
+                     // mapDiv.style.height = window.innerHeight + 'px';
+                     ancho = eval(window.innerWidth);
+                     if (ancho <= 960)
+                         ancho = 0
+                     else
+                         ancho = ((ancho - 970) / 2) - 3;
+
+                     div.style.width = ancho + 'px';
+                     div2.style.width = ancho + 'px';
+                     div3.style.width = ancho + 'px';
+                     div4.style.width = ancho + 'px';
+                     div11.style.width = div12.offsetWidth + 'px';
+
+
+                 }
+                 else {	//MSIE
+                     ancho = eval(document.body.clientWidth);
+                     if (ancho <= 960)
+                         ancho = 0
+                     else
+                         ancho = ((ancho - 970) / 2) - 3;
+
+                     div.style.width = ancho + 'px';
+                     div2.style.width = ancho + 'px';
+                     div3.style.width = (ancho + 9) + 'px';
+                     div4.style.width = (ancho + 9) + 'px';
+                     div11.style.width = div12.offsetWidth + 'px';
+
+
+                 }
+
+             }
+             catch (ex) {
+             }
+
+         }
+         fillWindow2();
+    </script>
+
+</head>
+
+<body>
+        <div id="loading-image">
+            <table><tr>
+            <td align=center valign=middle>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div> <img src="../../Content/logo.png" alt="Cargando..." /></div>     
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <div><img src="../../Content/ajax-loader.gif" alt="Cargando..." /></div>
+            </td>
+            </tr></table>
+	        
+        </div>
+    <div id="all" style="display:none;">
+    <div id="Header">
+	    <div id="compHeaderIzq"></div><div id="contHeader">
+        <div id="title">
+               <a href="http://www.ventanaturistica.com" ><img src="../../Content/logo.png" height="140px" /></a>
+<img src="../../Content/mapaHeader.png" height="140px" />
+
+            </div>
+            <div id="logindisplay">
+                <% Html.RenderPartial("Services"); %>
+            </div> 
+            
+            <div id="menucontainer">
+                <% Html.RenderAction("Categorias","Blog");%>
+            </div>
+        
+        </div><div id="compHeaderDer"></div>
+    </div>
+
+        
+            <div id="Main">
+	        <div id="compMainIzq"></div><div id="contMain">
+           
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+                <div class="bl3"><div class="br3"><div class="tl3"><div class="tr3">
+                <a title="Ofertas Destacadas" href="<%=Url.Action("Ofertas", "Patrocinante")%>">
+               OFERTAS DESTACADAS!!</a>
+                </div></div></div></div>
+                <br />
+                <div style=" height:140px; padding-left:15px">
+                    <% Html.RenderAction("Sponsors","Patrocinante");%>
+                    <% Html.RenderAction("Sponsors","Patrocinante");%>
+                    <% Html.RenderAction("Sponsors","Patrocinante");%>
+                    <% Html.RenderAction("Sponsors","Patrocinante");%>
+                </div>
+                <br /><br />
+                
+                <div class="hr"></div>
+
+                <% Html.RenderAction("Logos","Patrocinante");%>
+               
+            
+            </div><div id="compMainDer"></div>
+            </div>
+          
+         <div id="Footer">
+	        <div id="compFooterIzq"><div id="MountainIzq"></div></div><div id="contFooter"><div id="Mountain"></div>
+            <div>
+                <br /><br />
+                Ventana Turistica &copy;
+                </div>            
+            </div><div id="compFooterDer"><div id="MountainDer"></div></div>
+        </div>
+
+        
+    </div>
+</body>
+    
+    <!-- javascript coding -->
+    <script type="text/javascript">
+        jQuery.noConflict();
+
+
+        window.onresize = fillWindow;
+
+
+        function fillWindow() {
+            var div7 = document.getElementById("contMain");
+            var div8 = document.getElementById("compMainIzq");
+            var div9 = document.getElementById("compMainDer");
+            var div10 = document.getElementById("Main");
+            var div1 = document.getElementById("contFooter");
+            var div = document.getElementById("compFooterIzq");
+            var div2 = document.getElementById("compFooterDer");
+            var div3 = document.getElementById("compHeaderIzq");
+            var div4 = document.getElementById("compHeaderDer");
+            var div5 = document.getElementById("compMainIzq");
+            var div6 = document.getElementById("compMainDer");
+            var div11 = document.getElementById("Header");
+            var div12 = document.getElementById("Footer");
+
+
+            var ancho = 0;
+            try {
+                if (window.innerHeight) { //if browser supports window.innerWidth
+                    // mapDiv.style.height = window.innerHeight + 'px';
+                    ancho = eval(window.innerWidth);
+                    if (ancho <= 970)
+                        ancho = 0
+                    else
+                        ancho = ((ancho - 970) / 2) - 3;
+
+                    div.style.width = ancho + 'px';
+                    div2.style.width = ancho + 'px';
+                    div3.style.width = ancho + 'px';
+                    div4.style.width = ancho + 'px';
+                    div5.style.width = ancho + 'px';
+                    div6.style.width = ancho + 'px';
+                    div8.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div9.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div10.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div11.style.width = div12.offsetWidth + 'px';
+
+                    var suma = eval(div7.offsetWidth) + eval(div8.offsetWidth) + eval(div9.offsetWidth);
+                    var total = eval(div10.offsetWidth);
+                    var residuo = 0;
+                    var ladoIzq = div8;
+                    var ladoDer = div9;
+                    if (suma > total) {
+                        residuo = ((total - suma) / 2) + 1;
+                        ladoDer.offsetWidth = eval(ladoDer.offsetWidth - residuo) + px;
+                        ladoIzq.offsetWidth = eval(ladoIzq.offsetWidth - residuo) + px;
+                    }
+
+                    suma = eval(div1.offsetWidth) + eval(div.offsetWidth) + eval(div2.offsetWidth);
+                    total = eval(div12.offsetWidth);
+                    residuo = 0;
+                    ladoIzq = div;
+                    ladoDer = div2;
+                    if (suma > total) {
+                        residuo = ((total - suma) / 2) + 1;
+                        ladoDer.offsetWidth = eval(ladoDer.offsetWidth - residuo) + px;
+                        ladoIzq.offsetWidth = eval(ladoIzq.offsetWidth - residuo) + px;
+                    }
+                    suma = eval(div7.offsetHeight);
+                    total = eval(div10.offsetHeight);
+                    residuo = 0;
+                    ladoIzq = div7;
+                    ladoDer = div10;
+                    if (suma > total) {
+                        residuo = suma - total;
+                        ladoDer.style.height = eval(ladoDer.offsetHeight + residuo) + 'px';
+                    }
+
+
+                }
+                else {	//MSIE
+                    ancho = eval(document.body.clientWidth);
+                    if (ancho <= 970)
+                        ancho = 0
+                    else
+                        ancho = ((ancho - 970) / 2) - 3;
+
+
+
+                    div.style.width = ancho + 'px';
+                    div2.style.width = ancho + 'px';
+                    div3.style.width = (ancho + 9) + 'px';
+                    div4.style.width = (ancho + 9) + 'px';
+                    div5.style.width = ancho + 'px';
+                    div6.style.width = ancho + 'px';
+                    div8.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div9.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div10.style.height = eval(div7.offsetHeight + 25) + 'px';
+                    div11.style.width = div12.offsetWidth + 'px';
+
+                    var suma = eval(div7.offsetWidth) + eval(div8.offsetWidth) + eval(div9.offsetWidth);
+                    var total = eval(div10.offsetWidth);
+                    var residuo = 0;
+                    var ladoIzq = div8;
+                    var ladoDer = div9;
+                    if (suma > total) {
+                        residuo = ((total - suma) / 2) + 1;
+                        ladoDer.offsetWidth = eval(ladoDer.offsetWidth - residuo) + px;
+                        ladoIzq.offsetWidth = eval(ladoIzq.offsetWidth - residuo) + px;
+                    }
+
+                    suma = eval(div1.offsetWidth) + eval(div.offsetWidth) + eval(div2.offsetWidth);
+                    total = eval(div12.offsetWidth);
+                    residuo = 0;
+                    ladoIzq = div;
+                    ladoDer = div2;
+                    if (suma > total) {
+                        residuo = ((total - suma) / 2) + 1;
+                        ladoDer.offsetWidth = eval(ladoDer.offsetWidth - residuo) + px;
+                        ladoIzq.offsetWidth = eval(ladoIzq.offsetWidth - residuo) + px;
+                    }
+                    suma = eval(div7.offsetHeight);
+                    total = eval(div10.offsetHeight);
+                    residuo = 0;
+                    ladoIzq = div7;
+                    ladoDer = div10;
+                    if (suma > total) {
+                        residuo = (suma - total) + 3;
+                        ladoDer.style.height = eval(ladoDer.offsetHeight + residuo) + 'px';
+                    }
+                }
+
+            }
+            catch (ex) {
+            }
+
+        }
+        fillWindow();
+        jQuery(window).load(function () {
+            jQuery('.slideshow').cycle({
+                fx: 'scrollDown',
+                timeout: 6000,
+                delay: -2000
+            });
+            jQuery('#loading-image').hide();
+            jQuery('#all').fadeIn(2000);
+
+            fillWindow();
+            slideShow();
+            jQuery('img.captify').captify({});
+        });
+       
+    </script>
+    
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/mootools-1.2.1-core.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/MenuMatic_0.68.3.js") %>"></script>
+    
+	<!-- Create a MenuMatic Instance -->
+	<script type="text/javascript" >
+	    var myMenu = new MenuMatic({/*options here*/
+	});	
+	</script>
+
+
+</html>

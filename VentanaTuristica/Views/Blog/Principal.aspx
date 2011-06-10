@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<VentanaTuristica.Model.Blog>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site5.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<VentanaTuristica.Model.Blog>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Blog
@@ -27,7 +27,10 @@
 </script>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
 <div style=" padding-left:10px ; padding-right:10px">
+<% if (Model.Count() != 0)
+   {%>
     <h2 align="center" style="color: #F9A62B" >Bienvenido a mi Blog</h2>
     <!-- AddThis Button BEGIN -->
       <h1 class="addthis_toolbox addthis_default_style ">
@@ -42,16 +45,24 @@
        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4dc0a19b40eda3d6"></script>
     <!-- AddThis Button END -->   
 
- <% foreach (var item in Model) { %>
+ <%
+       foreach (var item in Model)
+       {%>
    
-     <h><%: item.Titulo %> </h>
+     <h><%:item.Titulo%> </h>
                
-   <h>  <%: String.Format("{0:g}", item.Fecha) %></h>
+   <h>  <%:String.Format("{0:g}", item.Fecha)%></h>
                
-   <h align="center">  <%= item.Descripcion %> </h>
+   <h align="center">  <%=item.Descripcion%> </h>
                
         
    
-    <%} %>
+    <%
+       }
+   }
+   else
+   { %>
+     <h2 align="center" style="color: #F9A62B" >No hay entradas al blog para el mes de <%: DateTime.Now.ToString("MMMM") %></h2>  
+   <%}%>
     </div>
 </asp:Content>
