@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,11 +34,32 @@ namespace VentanaTuristica.Controllers
         //
         // GET: /Blog/
         [ValidateInput(false)]
-        public ActionResult Principal()
+        public ActionResult Principal(int? anio, string mes)
         {
             IRepositorio<Blog> myRepoBlog = new BlogRepositorio();
             IList<Blog> listaBlog = myRepoBlog.GetAll();
-            return View(listaBlog);
+
+            if (anio != null && mes != null)
+            {
+                var b = (from blog in listaBlog
+                         where blog.Fecha.Year == anio && blog.Fecha.ToString("MMMM") == mes
+                         select blog);
+                return View(b.ToList());
+            }
+
+            if (anio != null)
+            {
+                var b = (from blog in listaBlog
+                         where blog.Fecha.Year == anio
+                         select blog);
+                return View(b.ToList());
+            }
+
+            var c = (from blog in listaBlog
+                     where blog.Fecha.Year == DateTime.Now.Year && blog.Fecha.ToString("MMMM") == DateTime.Now.ToString("MMMM")
+                     select blog);
+
+            return View(c.ToList());
         }
 
         //
@@ -125,7 +147,28 @@ namespace VentanaTuristica.Controllers
                 return View();
             }
         }
-       
+
+        public ActionResult Categorias()
+        {
+            IRepositorio<Blog> myRepoBlog = new BlogRepositorio();
+            IList<Blog> listaBlog = myRepoBlog.GetAll();
+
+            IList<IList<string>> a = new List<IList<string>>();
+            
+            var anios = (from blog in listaBlog
+                            select blog.Fecha.Year).Distinct();
+            foreach (var anio in anios)
+            {
+                var b = (from blog in listaBlog where blog.Fecha.Year == anio
+                         select blog.Fecha.ToString("MMMM").ToUpperInvariant()).Distinct();
+                a.Add(b.ToList());
+            }
+            ViewData["todosAnios"] = anios;
+            ViewData["todosMeses"] = a;
+            
+            return PartialView();
+        }
+
         [ValidateInput(false)]
         [Authorize(Users = "admin,j2lteam")]
         public ActionResult Find(string q)
