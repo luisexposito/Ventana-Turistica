@@ -295,30 +295,37 @@ namespace VentanaTuristica.Controllers
             patrocinante.Contacto[0].IdEmpresa = null;
 
             IRepositorio<Imagene> repoImagen = new ImageneRepositorio();
-            Imagene myImagene = new Imagene();
+            patrocinante.Contacto[0].IdEmpresa = null;
+
+            IList<Imagene> imagenes = repoImagen.GetAll();
+            patrocinante.Imagene.IdPatrocinante = patrocinante.IdPatrocinante;
+            foreach (var imagene in imagenes)
+            {
+                if (imagene.IdPatrocinante == patrocinante.IdPatrocinante)
+                {
+                    patrocinante.Imagene.IdImagen = imagene.IdImagen;
+                    if (patrocinante.File == null)
+                    {
+                        patrocinante.Imagene.DatosOriginal = imagene.DatosOriginal;
+                        patrocinante.Imagene.DatosTrans = imagene.DatosTrans;
+                    }
+                }
+            }
+
+            var tipo = Request["Logo"] as string;
+            if (tipo == "Sponsor")
+            {
+                patrocinante.Imagene.Tipo = "S";
+            }
+            else
+            {
+                patrocinante.Imagene.Tipo = "L";
+            }
             if (patrocinante.File != null)
             {
                 HttpFileCollectionBase files = ControllerContext.HttpContext.Request.Files;
-                myImagene.DatosOriginal = ConvertFile(patrocinante.File);
-                myImagene.DatosTrans = Resize(ConvertFile(patrocinante.File));
-                patrocinante.Contacto[0].IdEmpresa = null;
-                
-                IList<Imagene> imagenes = repoImagen.GetAll();
-                foreach (var imagene in imagenes)
-                {
-                    if (imagene.IdPatrocinante == patrocinante.IdPatrocinante)
-                        myImagene.IdImagen = imagene.IdImagen;
-                }
-
-                var tipo = Request["Logo"] as string;
-                if (tipo == "Sponsor")
-                {
-                    myImagene.Tipo = "S";
-                }
-                else
-                {
-                    myImagene.Tipo = "L";
-                }
+                patrocinante.Imagene.DatosOriginal = ConvertFile(patrocinante.File);
+                patrocinante.Imagene.DatosTrans = Resize(ConvertFile(patrocinante.File));
             }
 
             if (patrocinante.Nombre != null && patrocinante.Contacto[0].Nombre != null && patrocinante.Contacto[0].ListaTelefonos[0].CodigoInt != 0 &&
@@ -341,11 +348,9 @@ namespace VentanaTuristica.Controllers
                         else
                             repoTelefono.Save(telefono);
                 }
-                if (patrocinante.File != null)
-                {
-                    myImagene.IdPatrocinante = patrocinante.IdPatrocinante;
-                    repoImagen.Update(myImagene);
-                }
+                
+                repoImagen.Update(patrocinante.Imagene);
+                
 
                 return RedirectToAction("Index");
             }
