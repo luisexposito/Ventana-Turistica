@@ -20,10 +20,10 @@
 <div>
     <a title="Facebook" target="_blank" href="http://www.facebook.com/pages/Ventana-Turisticacom/113756445350700">
         <img src="<%=Url.Content("~/Content/facebook.png")%>" width="25px" /></a>
-    <a title="Twitter" target="_blank" href="#">
+    <a title="Twitter" target="_blank" href="http://twitter.com/#!/vturistica">
         <img src="<%=Url.Content("~/Content/twitter.gif")%>" width="25px" /></a>
     <a title="Fotos en Panoramio" target="_blank" href="http://www.panoramio.com/user/691632">
-    <a title="<%=ResourceEmpresa.Panoramio%>" target="_blank" href="http://www.panoramio.com/">
+    <a title="<%=ResourceEmpresa.Panoramio%>" target="_blank" href="http://www.panoramio.com/user/691632">
         <img src="<%=Url.Content("~/Content/panoramio.png")%>" width="25px" /></a>
     <a title="Blog" href="<%=Url.Action("Principal", "Blog")%>">
         <img src="<%=Url.Content("~/Content/blog.png")%>" width="24px" /></a> 

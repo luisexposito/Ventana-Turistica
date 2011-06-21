@@ -11,7 +11,7 @@
             { 
                 if (contador == 0)
                 { %>
-                    <a style="opacity: 1; " class="show"><img class="captify" src='<%=Url.Action("Show", "Imagene", new {id = item.IdImagen})%>' alt="<%: item.Descripcion %>" width="900px" title="" rel=""/></a>
+                    <a style="opacity: 1;" class="show" ><img class="captify" src='<%=Url.Action("Show", "Imagene", new {id = item.IdImagen})%>' alt="<%: item.Descripcion %>" width="900px" title="" rel=""/></a>
                 
                 <% } 
                 else

@@ -1,5 +1,26 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Import Namespace="Resources" %>
+<script runat="server">
 
+    protected override void InitializeCulture()
+    {
+        base.InitializeCulture();
+        if (Session["culture"] != null)
+        {
+            
+            Culture = Session["culture"].ToString();
+            UICulture = Session["culture"].ToString();
+            
+        }
+        else
+        {
+            Session["culture"] = "es-MX";
+            Culture = Session["culture"].ToString();
+            UICulture = Session["culture"].ToString();
+        }
+    }
+    
+</script>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     Acerca de nosotros
 </asp:Content>

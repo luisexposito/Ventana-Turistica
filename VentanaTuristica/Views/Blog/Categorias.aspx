@@ -1,7 +1,29 @@
 ﻿<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<IEnumerable<VentanaTuristica.Model.Blog>>" %>
+<%@ Import Namespace="Resources" %>
+<script runat="server">
+
+    protected override void InitializeCulture()
+    {
+        base.InitializeCulture();
+        if (Session["culture"] != null)
+        {
+            
+            Culture = Session["culture"].ToString();
+            UICulture = Session["culture"].ToString();
+            
+        }
+        else
+        {
+            Session["culture"] = "es-MX";
+            Culture = Session["culture"].ToString();
+            UICulture = Session["culture"].ToString();
+        }
+    }
+    
+</script>
 
     <ul id="nav">         
-        <li><%: Html.ActionLink("Home", "Index", "Home")%>
+        <li><%: Html.ActionLink( ResourceEmpresa.Home, "Index", "Home")%>
         </li>     
         <% 
             if (ViewData["todosAnios"] != null)
