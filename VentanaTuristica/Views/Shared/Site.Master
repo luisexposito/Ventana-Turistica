@@ -9,12 +9,12 @@
     <meta name="description" content="Portal web creado para mostrarle al viajero selectas ofertas turísticas, actividades y demás servicios disponibles en el país." />
     <meta name="keywords" content="ventana turistica turismo hospedajes viajes posadas actividades " />
     <meta name="author" content="J2LTeam - j2lteam.ve@gmail.com" />
-    <link rel="SHORTCUT ICON" href="../../Content/logo.ico"/>
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.tools.min.js") %>"></script>
-    <link href="../../Content/floatbox/floatbox.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="<%:Url.Content("~/Content/floatbox/floatbox.js") %>"></script>
     <link href="../../Content/sample.css?t=1" rel="stylesheet" type="text/css" />
+    <link href="../../Content/floatbox/floatbox.css" rel="stylesheet" type="text/css" />
+    <link rel="SHORTCUT ICON" href="../../Content/logo.ico"/>
+    <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.tools.min.js") %>"></script>
+    <script type="text/javascript" src="<%:Url.Content("~/Content/floatbox/floatbox.js") %>"></script>
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.js") %>"></script>
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/captify.tiny.js") %>"></script>
     <script type="text/javascript" src="<%:Url.Content("~/Scripts/jquery.cycle.all.latest.js") %>"></script>
