@@ -71,7 +71,7 @@
           }%>
         <%if (Html.Encode(Model.Empresa.Website).CompareTo("") != 0)
           {%>
-          <div id="publiWeb" class="descripcionContDere"><b>Website:</b> <a target="_blank"  href=" <%=Html.Encode(Model.Empresa.Website)%>"> ><%=ResourceEmpresa.Site%> </a></div>
+          <div id="publiWeb" class="descripcionContDere"><b>Website:</b> <a target="_blank"  href=" <%=Html.Encode(Model.Empresa.Website)%>"> <%=ResourceEmpresa.Site%> </a></div>
         <%}%>
         <% if (Html.Encode(Model.Latitud).CompareTo("") != 0)
            {%>

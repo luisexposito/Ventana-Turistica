@@ -2587,11 +2587,13 @@ MARCO PRINCICPAL
  
 #gallery {
 	height:430px;
-	
+	-moz-margin-end:910px;
+		
 }
 #gallery a {
 	float:left;
 	position:absolute;
+	
 }
 
 #gallery a img {
@@ -2599,7 +2601,7 @@ MARCO PRINCICPAL
 }
 
 #gallery a.show {
-	z-index:500
+	z-index:500;
 }
 
 #gallery .caption {

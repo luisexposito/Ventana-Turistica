@@ -31,4 +31,5 @@
 <% Html.RenderAction("Imagenes","Imagene");%>
 </div>
 <br class="c"/>
+<a target="_blank" href="http://d1.24counter.com/cc_stats/1307805054/"></a>
 </asp:Content>

@@ -159,8 +159,14 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Entries" xml:space="preserve">
+    <value>No Entries for </value>
+  </data>
   <data name="HighPrice" xml:space="preserve">
     <value>Higher price</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
   </data>
   <data name="Latitude" xml:space="preserve">
     <value>Latitude</value>
@@ -185,6 +191,9 @@
   </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="Offers" xml:space="preserve">
+    <value>Sales.!</value>
   </data>
   <data name="Panoramio" xml:space="preserve">
     <value>Panoramio Pics</value>

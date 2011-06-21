@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site5.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<VentanaTuristica.Model.Blog>>" %>
-
+<%@ Import Namespace="Resources" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Blog
 </asp:Content>
@@ -31,7 +31,7 @@
 <div style=" padding-left:10px ; padding-right:10px">
 <% if (Model.Count() != 0)
    {%>
-    <h2 align="center" style="color: #F9A62B" >Bienvenido a mi Blog</h2>
+    <h2 align="center" style="color: #F9A62B" >Blog VentanaTuristica</h2>
     <!-- AddThis Button BEGIN -->
       <h1 class="addthis_toolbox addthis_default_style ">
          <a class="addthis_button_preferred_1"></a>
@@ -62,7 +62,7 @@
    }
    else
    { %>
-     <h2 align="center" style="color: #F9A62B" >No hay entradas al blog para el mes de <%: DateTime.Now.ToString("MMMM") %></h2>  
+     <h2 align="center" style="color: #F9A62B" > <%=ResourceEmpresa.Entries%> <%: DateTime.Now.ToString("MMMM") %></h2>  
    <%}%>
     </div>
 </asp:Content>

@@ -187,11 +187,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No hay entradas para el mes de.
+        /// </summary>
+        internal static string Entries {
+            get {
+                return ResourceManager.GetString("Entries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Mayor Precio.
         /// </summary>
         internal static string HighPrice {
             get {
                 return ResourceManager.GetString("HighPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Principal.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
         
@@ -264,6 +282,15 @@ namespace Resources {
         internal static string Notes {
             get {
                 return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ofertas Destacadas!!!.
+        /// </summary>
+        internal static string Offers {
+            get {
+                return ResourceManager.GetString("Offers", resourceCulture);
             }
         }
         
